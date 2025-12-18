@@ -1,6 +1,9 @@
 import random
 from ascii_art import STAGES
 
+MAX_MISTAKES = len(STAGES) - 1
+
+
 # List of secret words
 WORDS = ["python", "git", "github", "snowman", "meltdown"]
 
@@ -36,7 +39,7 @@ def display_game_state(mistakes, secret_word, guessed_letters):
     else:
         print(f"\n  📝 Guessed Letters: (none yet)")
     
-    print(f"  ❄️  Mistakes: {mistakes} / 3")
+    print(f"  ❄️  Mistakes: {mistakes} / {MAX_MISTAKES}")
     print("=" * 50 + "\n")
     
     check_for_win(display_word, secret_word)
@@ -80,7 +83,7 @@ def play_game():
     print("🌨️  WELCOME TO SNOWMAN MELTDOWN! 🌨️".center(50))
     print("=" * 50)
     print("\n  Can you guess the word before the snowman melts?")
-    print("  You have 3 chances. Good luck!\n")
+    print(f"  You have {MAX_MISTAKES} chances. Good luck!\n")
     
     while True:
         try:
