@@ -25,10 +25,18 @@ def check_for_win(display_word, secret_word):
     """ Checks whether all letters have been guessed """
     if display_word.replace(" ", "") == secret_word:
         print("You won! Congratulation! The snowman survived.")
-        exit()
+        play_again()
 
 def input_validation(guess):
     return len(guess) == 1 and guess.isalpha()
+
+def play_again():
+    while True:
+        play_again = input("Do you want play again? (y/n): ")
+        if play_again.lower() == "y" or play_again.lower() == "yes":
+            play_game()
+        elif play_again.lower() == "n" or play_again.lower() == "no":
+            exit()
 
 def play_game():
     """ Main-function with game-loop """
@@ -41,7 +49,7 @@ def play_game():
             display_game_state(mistakes, secret_word, guessed_letters)
         except IndexError:
             print("You loose! Unfortunately, the snowman has melted.")
-            exit()
+            play_again()
         guess = input("Guess a letter: ").lower()
         if not input_validation(guess):
             print("Please enter exactly one letter!")
