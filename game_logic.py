@@ -27,6 +27,9 @@ def check_for_win(display_word, secret_word):
         print("You won! Congratulation! The snowman survived.")
         exit()
 
+def input_validation(guess):
+    return len(guess) == 1 and guess.isalpha()
+
 def play_game():
     """ Main-function with game-loop """
     secret_word = get_random_word()
@@ -40,6 +43,9 @@ def play_game():
             print("You loose! Unfortunately, the snowman has melted.")
             exit()
         guess = input("Guess a letter: ").lower()
+        if not input_validation(guess):
+            print("Please enter exactly one letter!")
+            continue
         guessed_letters.append(guess)
         if not guess in secret_word:
             mistakes += 1
