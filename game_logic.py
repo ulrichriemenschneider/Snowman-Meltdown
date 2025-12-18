@@ -24,7 +24,7 @@ def display_game_state(mistakes, secret_word, guessed_letters):
 def check_for_win(display_word, secret_word):
     """ Checks whether all letters have been guessed """
     if display_word.replace(" ", "") == secret_word:
-        print("You won! Congratulation!")
+        print("You won! Congratulation! The snowman survived.")
         exit()
 
 def play_game():
@@ -37,10 +37,10 @@ def play_game():
         try:
             display_game_state(mistakes, secret_word, guessed_letters)
         except IndexError:
-            print("You loose!")
+            print("You loose! Unfortunately, the snowman has melted.")
             exit()
         guess = input("Guess a letter: ").lower()
         guessed_letters.append(guess)
         if not guess in secret_word:
             mistakes += 1
-            print(f"{guess} is not in the word you are looking for")
+            print(f"{guess} is not in the word you are looking for, but the snowman is still alive!")
