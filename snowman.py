@@ -38,9 +38,8 @@ def get_random_word():
     return WORDS[random.randint(0, len(WORDS) - 1)]
 
 def display_game_state(mistakes, secret_word, guessed_letters):
-    # Display the snowman stage for the current number of mistakes.
+    """ Display the snowman stage for the current number of mistakes and checks for win """
     print(STAGES[mistakes])
-    # Build a display version of the secret word.
     display_word = ""
     for letter in secret_word:
         if letter in guessed_letters:
@@ -52,27 +51,24 @@ def display_game_state(mistakes, secret_word, guessed_letters):
     check_for_win(display_word, secret_word)
 
 def check_for_win(display_word, secret_word):
+    """ Checks whether all letters have been guessed """
     if display_word.replace(" ", "") == secret_word:
         print("You won! Congratulation!")
         exit()
 
 def play_game():
+    """ Main-function with game-loop """
     secret_word = get_random_word()
     guessed_letters = []
     mistakes = 0
-
     print("Welcome to Snowman Meltdown!")
-
     while True:
-        # For now, display the initial game state.
         try:
             display_game_state(mistakes, secret_word, guessed_letters)
         except IndexError:
             print("You loose!")
             exit()
-        # Prompt user for one guess (logic to be enhanced later)
         guess = input("Guess a letter: ").lower()
-        print("You guessed:", guess)
         guessed_letters.append(guess)
         if not guess in secret_word:
             mistakes += 1
