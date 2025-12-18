@@ -49,6 +49,12 @@ def display_game_state(mistakes, secret_word, guessed_letters):
             display_word += "_ "
     print("Word: ", display_word)
     print("\n")
+    check_for_win(display_word, secret_word)
+
+def check_for_win(display_word, secret_word):
+    if display_word.replace(" ", "") == secret_word:
+        print("You won! Congratulation!")
+        exit()
 
 def play_game():
     secret_word = get_random_word()
@@ -66,11 +72,11 @@ def play_game():
             exit()
         # Prompt user for one guess (logic to be enhanced later)
         guess = input("Guess a letter: ").lower()
-        guessed_letters.append(guess)
-        mistakes += 1
-
         print("You guessed:", guess)
-
-    
+        guessed_letters.append(guess)
+        if not guess in secret_word:
+            mistakes += 1
+            print(f"{guess} is not in the word you are looking for")
+   
 if __name__ == "__main__":
     play_game()
